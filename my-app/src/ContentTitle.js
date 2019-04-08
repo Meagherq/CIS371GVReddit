@@ -7,7 +7,7 @@ function ContentTitle(props) {
     var currentUser = fire.auth().currentUser;
     return (    
         <React.Fragment>
-            <UpvoteForPost />
+            {/* <UpvoteForPost /> */}
             <img src={props.PageContent.imgUrl}></img>
             <h3>{props.PageContent.postTitle}</h3>
             <p>Submitted by {props.PageContent.userID} on {props.postDate}</p>
