@@ -25,6 +25,9 @@ class Home extends Component {
                 username: fire.auth().currentUser.email.substring(0, fire.auth().currentUser.email.indexOf('@')),
                 totalUpvotes: 0,
                 totalDownvotes: 0,
+            }).then( () => {
+                userRef = fire.database().ref('Users/' + tempUser.uid);
+                alert(userRef.email);
             });
         }
     });
@@ -57,6 +60,10 @@ class Home extends Component {
   logout() {
     fire.auth().signOut();
   }
+//   getImgUrlFromFirebase() {
+//       imgUrl = postRef.imgUrl;
+//       return imgUrl
+//   }
 
   render() {
     return (
