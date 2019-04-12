@@ -1,0 +1,23 @@
+
+.votebox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(205, 215, 233);
+}
+.postTile img{
+    width: 150px;
+}
+.postdata{
+    display: inline
+    /* flex-direction: row; */
+}
+.postTile{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    margin: 5px;
+}
+.postTile h2{
+    margin: 5px;
+}

@@ -77,6 +77,7 @@ class Home extends Component {
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
           <Post postid="template(ID)"/>
+          <Post postid="template(ID)"/>
         </div>
         <button onClick={this.logout}>Logout</button>
       </div>

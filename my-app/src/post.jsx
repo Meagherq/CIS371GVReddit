@@ -29,6 +29,7 @@ class Post extends Component {
         if (this.state.postInfo !== null) {
             return <div className="postTile">
                     <div className="votebox">
+                        {/* TODO: add functionality for the buttons below */}
                         <button value="upvote">Good!</button>
                         <span>{this.state.postInfo.upvotes - this.state.postInfo.downvotes}</span>
                         <button value="downvote">Bad!</button>
