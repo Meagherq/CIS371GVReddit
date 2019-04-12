@@ -8,7 +8,7 @@ function ContentTitle(props) {
     return (    
         <React.Fragment>
             {/* <UpvoteForPost /> */}
-            <img src={props.PageContent.imgUrl}></img>
+            {/* <img src={props.PageContent.imgUrl}></img> */}
             <h3>{props.PageContent.postTitle}</h3>
             <p>Submitted by {props.PageContent.userID} on {props.postDate}</p>
         </React.Fragment>

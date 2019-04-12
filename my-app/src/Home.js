@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 //import ContentTitle from "./ContentTitle";
 import fire from "./config/Fire";
+import Post from "./post.jsx";
 
 //states are local variables read/write
 //props are input parameters read only
@@ -74,16 +75,10 @@ class Home extends Component {
         <p id="authors">By: Quinn Meagher, Nolan Gustafson, and Jake Young</p>
         <br />
         <h1>Welcome to Home</h1>
+        <div className ="ContentTitle">
+          <Post postid="template(ID)"/>
+        </div>
         <button onClick={this.logout}>Logout</button>
-      </div>
-      <div className ="ContentTitle">
-        <ol>
-          {/* <li><ContentTitle /></li>
-          <li><ContentTitle /></li>
-          <li><ContentTitle /></li>
-          <li><ContentTitle /></li>
-          <li><ContentTitle /></li> */}
-        </ol>
       </div>
       </React.Fragment>
     );
