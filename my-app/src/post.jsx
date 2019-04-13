@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import fire from "./config/Fire";
 import './post.css';
+import ReactDOM from "react-dom"
+import PostPage from "./PostPage.jsx"
+import Home from "./Home.js"
 
 
 // feed me a prop called postid which will be the key of the post in Firebase
 class Post extends Component {
     constructor(props) {
         super(props);
+        this.change = this.change.bind(this)
+        this.goHome = this.goHome.bind(this)
         this.state = {
             postInfo : null
         }
@@ -24,10 +29,19 @@ class Post extends Component {
     componentDidUpdate(prevProps) {
         //not sure if we need this, since we probably only want to update when the user requests an update, but maybe not
     }
+
+    goHome() {
+        ReactDOM.render(<Home />, document.getElementById("root"))
+    }
+
+    change() {
+        ReactDOM.render(<PostPage postid="templateID" username={this.props.username}/>, document.getElementById("root"));
+    }    
     
     render() {
         if (this.state.postInfo !== null) {
             return <div className="postTile">
+                    {/* <button onClick={this.goHome}>Home</button> */}
                     <div className="votebox">
                         {/* TODO: add functionality for the buttons below */}
                         <button value="upvote">Good!</button>
@@ -36,7 +50,7 @@ class Post extends Component {
                     </div>
                     <div className="postdata">
                         <span className="author">{"Posted by: "+this.state.postInfo.userID}</span><br/>
-                        <h2 className="title">{this.state.postInfo.title}</h2>
+                        <h2 onClick={this.change} className="title">{this.state.postInfo.title}</h2>
                         <img src={this.state.postInfo.media} alt={this.state.postInfo.userID + "img"}></img>
                     </div>
                 </div>;
@@ -47,5 +61,4 @@ class Post extends Component {
         }
     }
 }
-
 export default Post;

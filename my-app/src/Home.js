@@ -2,12 +2,16 @@ import React, { Component } from "react";
 //import ContentTitle from "./ContentTitle";
 import fire from "./config/Fire";
 import Post from "./post.jsx";
+import NavBar from "./NavBar.jsx"
 
 //states are local variables read/write
 //props are input parameters read only
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        username : fire.auth().currentUser.email.substring(0, fire.auth().currentUser.email.indexOf('@'))
+    }
     this.logout = this.logout.bind(this);
     var tempUser = fire.auth().currentUser;
     var database = fire.database();
@@ -15,7 +19,7 @@ class Home extends Component {
     fire.database().ref('/Users/' + tempUser.uid).once('value').then(function(snapshot) {
         if (snapshot.exists()) {
             userRef = snapshot.val();
-            alert(snapshot.val().email);
+            //alert(snapshot.val().email);
             console.log(userRef.email);
         } else {
             //push all the user properties
@@ -28,13 +32,11 @@ class Home extends Component {
                 totalDownvotes: 0,
             }).then( () => {
                 userRef = fire.database().ref('Users/' + tempUser.uid);
-                alert(userRef.email);
+                //alert(userRef.email);
             });
         }
-    });
-  }   
-    
-// topRef.child("Users").once(tempUser, function(snapshot) {
+    });  
+}
 //     if (snapshot.exists()) {
 //         var mainRef = snapshot.val();
 //         alert(snapshot.val().email);
@@ -68,20 +70,24 @@ class Home extends Component {
 
   render() {
     return (
-        <React.Fragment>
-      <div>
+        //Dont modify app modify base elementbyid
+        <div>
+        <div className="NavBar">
+            <NavBar />
+        </div>
+      <div id="base">
         <p id="title">CIS 371 GVReddit</p>
         <br />
         <p id="authors">By: Quinn Meagher, Nolan Gustafson, and Jake Young</p>
         <br />
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
-          <Post postid="template(ID)"/>
-          <Post postid="template(ID)"/>
+          <Post postid="template(ID)" username={this.state.username}/>
+          <Post postid="template(ID)" username={this.state.username}/>
         </div>
         <button onClick={this.logout}>Logout</button>
       </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
