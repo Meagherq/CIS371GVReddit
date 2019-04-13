@@ -30,9 +30,9 @@ class Post extends Component {
             return <div className="postTile">
                     <div className="votebox">
                         {/* TODO: add functionality for the buttons below */}
-                        <button value="upvote">Good!</button>
+                        <button value="upvote">^</button>
                         <span>{this.state.postInfo.upvotes - this.state.postInfo.downvotes}</span>
-                        <button value="downvote">Bad!</button>
+                        <button value="downvote">v</button>
                     </div>
                     <div className="postdata">
                         <span className="author">{"Posted by: "+this.state.postInfo.userID}</span><br/>

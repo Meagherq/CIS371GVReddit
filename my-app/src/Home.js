@@ -2,6 +2,7 @@ import React, { Component } from "react";
 //import ContentTitle from "./ContentTitle";
 import fire from "./config/Fire";
 import Post from "./post.jsx";
+import PostList from "./postList.jsx";
 
 //states are local variables read/write
 //props are input parameters read only
@@ -15,8 +16,8 @@ class Home extends Component {
     fire.database().ref('/Users/' + tempUser.uid).once('value').then(function(snapshot) {
         if (snapshot.exists()) {
             userRef = snapshot.val();
-            alert(snapshot.val().email);
-            console.log(userRef.email);
+            // alert(snapshot.val().email);
+            // console.log(userRef.email);
         } else {
             //push all the user properties
             //fire.database().ref('Users/' + tempUser.uid);
@@ -76,8 +77,10 @@ class Home extends Component {
         <br />
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
-          <Post postid="template(ID)"/>
-          <Post postid="template(ID)"/>
+          {/* <Post postid="template(ID)"/>
+          <Post postid="template(ID)"/> */}
+          <PostList/>
+
         </div>
         <button onClick={this.logout}>Logout</button>
       </div>
