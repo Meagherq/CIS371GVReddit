@@ -80,6 +80,9 @@ class Home extends Component {
           <Post postid="template(ID)"/>
           <Post postid="template(ID)"/>
           {/* <PostList/> */}
+          {/* <Post postid="template(ID)"/>
+          <Post postid="template(ID)"/> */}
+          <PostList/>
 
         </div>
         <button onClick={this.logout}>Logout</button>
