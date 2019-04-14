@@ -45,7 +45,6 @@ class Post extends Component {
         let yaynay = e.target.value
         let currentuid = fire.auth().currentUser.uid
         let userRef = this.state.topRef.child("/Users/"+currentuid)
-        // userRef.child("/votesMade/").equalTo(this.props.postid).once("value", snapshot =>{
         userRef.child("/votesMade/"+this.props.postid).once("value", snapshot =>{
             if(snapshot.exists()){ //vote has already been made
                 //previous vote for this post is 'up'
@@ -108,7 +107,6 @@ class Post extends Component {
             return <div className="postTile">
                     {/* <button onClick={this.goHome}>Home</button> */}
                     <div className="votebox">
-                        {/* TODO: add functionality for the buttons below */}
                         <button value="up" onClick={this.vote}>^</button>
                         <span>{this.state.postInfo.upvotes - this.state.postInfo.downvotes}</span>
                         <button value="down" onClick={this.vote}>v</button>
