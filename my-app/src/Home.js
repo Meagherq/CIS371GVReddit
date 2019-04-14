@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import fire from "./config/Fire";
 import Post from "./post.jsx";
 import PostList from "./postList.jsx";
+import ReactDOM from "react-dom"
 import NavBar from "./NavBar.jsx"
+import Login from "./Login";
 
 //states are local variables read/write
 //props are input parameters read only
@@ -63,6 +65,8 @@ class Home extends Component {
 
   logout() {
     fire.auth().signOut();
+    // eslint-disable-next-line no-restricted-globals
+    location.reload(true);
   }
 //   getImgUrlFromFirebase() {
 //       imgUrl = postRef.imgUrl;

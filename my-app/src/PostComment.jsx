@@ -59,7 +59,13 @@ class PostComment extends Component {
         commentIds.map(function(x) {
             return fire.database().ref("/Comments/"+x+"/").once('value').then(function(snapshot) {
                 //console.log(snapshot.val().text)
-                commentInfo.push({id : x, text : snapshot.val().text, user: snapshot.val().userID, upvotes : snapshot.val().upvotes, downvotes : snapshot.val().downvotes})
+                commentInfo.push({
+                    id : x, 
+                    text : snapshot.val().text, 
+                    user: snapshot.val().userID, 
+                    upvotes : snapshot.val().upvotes, 
+                    downvotes : snapshot.val().downvotes
+                })
             });   
         });
     }
