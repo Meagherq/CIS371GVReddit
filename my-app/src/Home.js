@@ -4,8 +4,8 @@ import fire from "./config/Fire";
 import Post from "./post.jsx";
 import NavBar from "./NavBar.jsx"
 
-//states are local variables read/write
-//props are input parameters read only
+
+var postList = []
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,8 @@ class Home extends Component {
                 //alert(userRef.email);
             });
         }
-    });  
+    });
+    
 }
 //     if (snapshot.exists()) {
 //         var mainRef = snapshot.val();
@@ -60,9 +61,64 @@ class Home extends Component {
 //     });
 //   }
 
+    componentDidMount() {
+        // var postRef = fire.database().ref("Posts/").child().orderByChild("upvotes").limitToLast(10);
+        // postRef.on("value", function(snapshot) {
+        //     snapshot.forEach(function(postSnapshot) {
+        //         postList.push({postID : postSnapshot.val().postid, userID : postSnapshot.val().userID})
+        //         console.log(postSnapshot.val().postid)
+        //         console.log(postSnapshot.val().postid)
+        //     });
+        // });
+
+        
+        // var tref = fire.database().ref("/Posts/").child().on('value', (postSnapshot =>{
+        //     return tref.ref().orderByChild("age").limitToLast(3);
+        //     postList.push({postID : postSnapshot.val().postid, userID : postSnapshot.val().userID})
+        // }));
+        // this.setState({postInfo : ref})
+        
+    }
+
   logout() {
     fire.auth().signOut();
   }
+
+    // var ref = fire.database().ref("Posts/");
+    // ref.orderByChild("upvotes").limitToFirst(10).on("value", function(snapshot) {
+    //   // This will be called exactly two times (unless there are less than two
+    //   // dinosaurs in the Database).
+    //     snapshot.forEach(function(postSnapshot) {
+    //     postList.push({postID : snapshot.val().postid, userID : snapshot.val().userID})
+    //     });
+      // It will also get fired again if one of the first two dinosaurs is
+      // removed from the data set, as a new dinosaur will now be the second
+      // shortest.
+
+
+  
+
+//   ref.child("stegosaurus").child("height").on("value", function(stegosaurusHeightSnapshot) {
+//     var favoriteDinoHeight = stegosaurusHeightSnapshot.val();
+//     var queryRef = ref.orderByChild("height").endAt(favoriteDinoHeight).limitToLast(2)
+//     queryRef.on("value", function(querySnapshot) {
+//         if (querySnapshot.numChildren() == 2) {
+//           // Data is ordered by increasing height, so we want the first entry
+//           querySnapshot.forEach(function(dinoSnapshot) {
+//             console.log("The dinosaur just shorter than the stegasaurus is " + dinoSnapshot.key());
+//             // Returning true means that we will only loop through the forEach() one time
+//             return true;
+//           });
+//         } else {
+//           console.log("The stegosaurus is the shortest dino");
+//         }
+//     });
+//   });
+
+
+
+
+
 //   getImgUrlFromFirebase() {
 //       imgUrl = postRef.imgUrl;
 //       return imgUrl
@@ -82,6 +138,7 @@ class Home extends Component {
         <br />
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
+          {/* {postList.map((x) => <Post postid={x.postID} username={x.userID} />)} */}
           <Post postid="template(ID)" username={this.state.username}/>
           <Post postid="template(ID)" username={this.state.username}/>
         </div>

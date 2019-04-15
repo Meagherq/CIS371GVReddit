@@ -35,7 +35,7 @@ class Post extends Component {
     }
 
     change() {
-        ReactDOM.render(<PostPage postid="templateID" username={this.props.username}/>, document.getElementById("root"));
+        ReactDOM.render(<PostPage postid={this.props.postid} username={this.props.username}/>, document.getElementById("root"));
     }    
     
     render() {

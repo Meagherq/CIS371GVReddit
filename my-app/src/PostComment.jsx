@@ -3,67 +3,39 @@ import React, { Component } from "react";
 import fire from "./config/Fire";
 
 
-
 var commentInfo = []
 var commentText = "";
 var commentIds = []
-var ref = null
-      //  var commentIds = []
+
 class PostComment extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this)
         this.handleCommentSubmit = this.handleCommentSubmit.bind(this)
-        //this.create_UUID = this.create_UUID.bind(this)
         this.state = {
-            postInfo : null,
-            //commentText : null
+            postInfo : [],
         }
         
-        // var commentIds = []
-        // //var commentInfo = []
-        // //do a firebase query for the post
-        // let ref = fire.database().ref("/Posts/"+this.props.postid+"/")
-        // // this.setState({postInfo : ref})
-        // ref.on('value', (snapshot =>{
-        //     this.setState({postInfo : snapshot.val()})
-        //     commentIds = snapshot.val().comments
-        // }));
-
-        // commentIds.map(function(x) {
-        //     return fire.database().ref("/Comments/"+x+"/").once('value').then(function(snapshot) {
-        //         console.log(snapshot.val().text)
-        //         commentInfo.push({id : x, text : snapshot.val().text, user: snapshot.val().userID, upvotes : snapshot.val().upvotes, downvotes : snapshot.val().downvotes})
-        //     });   
-        // });
-
-
-
-
     }
 
 
 
     componentDidMount() {
-        //var commentIds = []
-        //var commentInfo = []
-        //do a firebase query for the post
-        ref = fire.database().ref("/Posts/"+this.props.postid+"/")
-        // this.setState({postInfo : ref})
-        ref.on('value', (snapshot =>{
-            this.setState({postInfo : snapshot.val()})
-            commentIds = snapshot.val().comments
-        }));
-        console.log(commentIds)
-        commentInfo = []
-        commentIds.map(function(x) {
-            return fire.database().ref("/Comments/"+x+"/").once('value').then(function(snapshot) {
-                //console.log(snapshot.val().text)
-                commentInfo.push({id : x, text : snapshot.val().text, user: snapshot.val().userID, upvotes : snapshot.val().upvotes, downvotes : snapshot.val().downvotes})
-            });   
-        });
-    }
-    
+    fire.database().ref("/Posts/"+this.props.postid+"/comments").on('child_added', ((commentSnapshot) => {
+            console.log(commentSnapshot.key, "string")
+                fire.database().ref("/Comments/"+commentSnapshot.key).once('value', (infoSnapshot) => {
+                console.log(infoSnapshot.val(), "string2")
+                commentInfo.push({...infoSnapshot.val(), commentKey: infoSnapshot.key})
+                console.log(commentInfo, "string3")
+                this.setState({postInfo : commentInfo})
+            })
+        })
+    )
+
+}
+
+
+
     handleCommentSubmit() {
         //commentsRef.push()
         // fire.database().ref('/Comments/')
@@ -76,15 +48,17 @@ class PostComment extends Component {
             userID : this.props.username
             }
             var Uid = Math.random().toString(36).substr(2, 9)
-        fire.database().ref('/Comments/_' + Uid).once('value').then(function(snapshot) {
-            fire.database().ref('Comments/_' + Uid).set(newData);
-            
-        });
-        fire.database().ref('Posts/'+this.props.postid+'/comments_' + Uid).set({Uid : this.props.postid})
+        fire.database().ref('Comments/' + Uid).set(newData);    
+        fire.database().ref('Posts/'+this.props.postid+'/comments/'+Uid).set({userID : this.props.username})
+
+        // fire.database().ref('Posts/'+this.props.postid+'/comments/' + Uid).once('value').then(function(snapshot) {
+        //     fire.database().ref('Posts/'+this.props.postid+'/comments/' + Uid).set({userID : this.props.username});     
+        // });
+        commentInfo.push({id : Uid, text : commentText, user: this.props.username, upvotes : 0, downvotes : 0})
+        console.log(commentInfo)
         
     }
         //commentInfo.push({id : this.props.postid, text : commentText, user: this.props.username, upvotes : 0, downvotes : 0})
-
 
 
     
@@ -92,12 +66,9 @@ class PostComment extends Component {
         commentText = e.target.value
     }
 
-    componentDidUpdate() {
-
-    }
 
     componentWillUnmount() {
-        
+        commentInfo = []
     }
 
     render() {
@@ -111,7 +82,7 @@ class PostComment extends Component {
                     </div>
                 <button type="submit" onClick={this.handleCommentSubmit} className="btn btn-primary">Submit!</button>
             <ol>
-                {commentInfo.map((x) => <li key={x.id}>{x.text} | posted by: {x.user} test test {x.id} and {x.upvotes} and {this.props.username}</li>)}
+                {this.state.postInfo.map(function(snapshot){ return(<li key={snapshot.commentKey}>{snapshot.text} | posted by: {snapshot.userID}</li>)})}
             </ol>
         </div>
         );

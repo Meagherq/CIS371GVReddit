@@ -27,8 +27,8 @@ class PostPage extends Component {
         return (
         <div id="PostPage">
             <NavBar />
-            <Post postid="template(ID)"/>
-            <PostComment postid="template(ID)" username={this.props.username}/>
+            <Post postid={this.props.postid}/>
+            <PostComment postid={this.props.postid} username={this.props.username}/>
         </div>
         );
     }
