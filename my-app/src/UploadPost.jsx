@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import fire from "./config/Fire";
 import NavBar from "./NavBar.jsx"
+import ReactDOM from "react-dom"
+import Home from "./Home.js";
 
 class UploadPost extends Component {
     constructor(props) {
@@ -9,6 +11,7 @@ class UploadPost extends Component {
         this.handleDescripChange = this.handleDescripChange.bind(this)
         this.handleUrlChange = this.handleUrlChange.bind(this)
         this.handlePostSubmit = this.handlePostSubmit.bind(this)
+        this.goHome = this.goHome.bind(this)
         this.state = {
             postTitle: "",
             postDescription: "",
@@ -33,7 +36,9 @@ class UploadPost extends Component {
         })
     }
 
-
+    goHome() {
+        ReactDOM.render(<Home />, document.getElementById("root"))
+    }
 
     handlePostSubmit(){
         fire.database().ref('Posts/').push({
@@ -44,6 +49,7 @@ class UploadPost extends Component {
             title: this.state.postTitle,
             userID: this.props.username,
         })
+        this.goHome()
     }
     render() {
         return(

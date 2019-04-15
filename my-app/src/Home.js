@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import fire from "./config/Fire";
-import Post from "./post.jsx";
 import NavBar from "./NavBar.jsx"
+import PostList from "./postList.jsx"
 
 
 class Home extends Component {
