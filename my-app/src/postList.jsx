@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from "./config/Fire";
-import Post from'./post.css';
+import Post from'./post.jsx';
 
 
 // feed me a prop called postnumber which will be the number of posts to show
@@ -9,20 +9,21 @@ class PostList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            postkeys : []
+            postkeys : null
         }
     }
 
     componentDidMount() {
         //do a firebase query for the posts
         let ref = fire.database().ref("/Posts/")
-        ref.once('value', function(snapshot) {
-            let keyarray = []
+        let keyarray = []
+        ref.once('value', snapshot => {
             snapshot.forEach(function(childSnapshot) {
                 keyarray.push(childSnapshot.key)
             });
             this.setState({postkeys : keyarray})
         });
+        
     }
 
     componentDidUpdate(prevProps) {
@@ -31,10 +32,12 @@ class PostList extends Component {
     
     render() {
         if (this.state.postkeys !== null) {
+            console.log("some text",this.state.postkeys)
             return <div className="postList">
-                    {this.state.postkeys.map(k => <Post postid={k} key={k}/>)}
+                    {this.state.postkeys.map(k => <Post postid={k} username={this.props.username} key={k}/>)}
                 </div>;
-        } else {
+        }
+        else {
             return <div>
                     <p>...No Posts to show...</p>
                 </div>;
