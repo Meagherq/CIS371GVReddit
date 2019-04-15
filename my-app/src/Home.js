@@ -58,10 +58,9 @@ class Home extends Component {
         <br />
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
-          {/* {postList.map((x) => <Post postid={x.postID} username={x.userID} />)} */}
-          {/* <PostList/> */}
-          <Post postid="template(ID)" username={this.state.username}/>
-          <Post postid="template(ID)" username={this.state.username}/>
+          <PostList username={this.state.username}/>
+          {/* <Post postid="template(ID)" username={this.state.username}/>
+          <Post postid="template(ID)" username={this.state.username}/> */}
         </div>
         <button onClick={this.logout}>Logout</button>
       </div>
