@@ -2,7 +2,10 @@ import React, { Component } from "react";
 //import ContentTitle from "./ContentTitle";
 import fire from "./config/Fire";
 import Post from "./post.jsx";
+import PostList from "./postList.jsx";
+import ReactDOM from "react-dom"
 import NavBar from "./NavBar.jsx"
+import Login from "./Login";
 
 
 var postList = []
@@ -82,6 +85,8 @@ class Home extends Component {
 
   logout() {
     fire.auth().signOut();
+    // eslint-disable-next-line no-restricted-globals
+    location.reload(true);
   }
 
     // var ref = fire.database().ref("Posts/");
@@ -139,6 +144,7 @@ class Home extends Component {
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
           {/* {postList.map((x) => <Post postid={x.postID} username={x.userID} />)} */}
+          {/* <PostList/> */}
           <Post postid="template(ID)" username={this.state.username}/>
           <Post postid="template(ID)" username={this.state.username}/>
         </div>
