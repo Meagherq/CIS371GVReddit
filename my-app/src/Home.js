@@ -83,9 +83,9 @@ class Home extends Component {
         <br />
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
-          {/* <PostList/> */}
-          <Post postid="template(ID)" username={this.state.username}/>
-          <Post postid="template(ID)" username={this.state.username}/>
+          <PostList/>
+          {/* <Post postid="template(ID)" username={this.state.username}/>
+          <Post postid="template(ID)" username={this.state.username}/> */}
         </div>
         <button onClick={this.logout}>Logout</button>
       </div>
