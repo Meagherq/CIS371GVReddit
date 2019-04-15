@@ -5,7 +5,7 @@ import fire from "./config/Fire";
 
 var commentInfo = []
 var commentText = "";
-var commentIds = []
+
 
 class PostComment extends Component {
     constructor(props) {
@@ -37,8 +37,6 @@ class PostComment extends Component {
 
 
     handleCommentSubmit() {
-        //commentsRef.push()
-        // fire.database().ref('/Comments/')
 
         var newData= {
             downvotes : 0,
@@ -54,7 +52,7 @@ class PostComment extends Component {
         // fire.database().ref('Posts/'+this.props.postid+'/comments/' + Uid).once('value').then(function(snapshot) {
         //     fire.database().ref('Posts/'+this.props.postid+'/comments/' + Uid).set({userID : this.props.username});     
         // });
-        commentInfo.push({id : Uid, text : commentText, user: this.props.username, upvotes : 0, downvotes : 0})
+        //commentInfo.push({id : Uid, text : commentText, user: this.props.username, upvotes : 0, downvotes : 0})
         console.log(commentInfo)
         
     }

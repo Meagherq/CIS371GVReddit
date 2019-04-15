@@ -1,8 +1,6 @@
 import React, { Component } from "react"
-//import ContentTitle from "./ContentTitle";
 import fire from "./config/Fire"
 import Post from "./post.jsx"
-import ReactDom from "react-dom"
 import NavBar from "./NavBar.jsx"
 import PostComment from "./PostComment.jsx"
 
@@ -26,7 +24,7 @@ class PostPage extends Component {
     render() {
         return (
         <div id="PostPage">
-            <NavBar />
+            <NavBar username={this.props.username}/>
             <Post postid={this.props.postid}/>
             <PostComment postid={this.props.postid} username={this.props.username}/>
         </div>
