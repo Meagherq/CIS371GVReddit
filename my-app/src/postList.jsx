@@ -34,7 +34,7 @@ class PostList extends Component {
         if (this.state.postkeys !== null) {
             console.log("some text",this.state.postkeys)
             return <div className="postList">
-                    {this.state.postkeys.map(k => <Post postid={k} username="gustafsn" key={k}/>)}
+                    {this.state.postkeys.map(k => <Post postid={k} username={this.props.username} key={k}/>)}
                 </div>;
         }
         else {

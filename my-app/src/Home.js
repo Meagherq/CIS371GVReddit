@@ -83,7 +83,7 @@ class Home extends Component {
         <br />
         <h1>Welcome to Home</h1>
         <div className ="ContentTitle">
-          <PostList/>
+          <PostList username={this.state.username}/>
           {/* <Post postid="template(ID)" username={this.state.username}/>
           <Post postid="template(ID)" username={this.state.username}/> */}
         </div>
