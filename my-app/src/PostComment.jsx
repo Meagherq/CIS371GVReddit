@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import ContentTitle from "./ContentTitle";
 import fire from "./config/Fire";
 
 
@@ -40,15 +39,8 @@ class PostComment extends Component {
             var Uid = Math.random().toString(36).substr(2, 9)
         fire.database().ref('Comments/' + Uid).set(newData);    
         fire.database().ref('Posts/'+this.props.postid+'/comments/'+Uid).set({userID : this.props.username})
-
-        // fire.database().ref('Posts/'+this.props.postid+'/comments/' + Uid).once('value').then(function(snapshot) {
-        //     fire.database().ref('Posts/'+this.props.postid+'/comments/' + Uid).set({userID : this.props.username});     
-        // });
-        //commentInfo.push({id : Uid, text : commentText, user: this.props.username, upvotes : 0, downvotes : 0})
-        console.log(commentInfo)
-        
+        console.log(commentInfo)   
     }
-        //commentInfo.push({id : this.props.postid, text : commentText, user: this.props.username, upvotes : 0, downvotes : 0})
 
 
     
@@ -63,16 +55,14 @@ class PostComment extends Component {
 
     render() {
         return (
-        <div id="PostComment">
-                    <div className="form-group">
-                        {/* <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input rows = "4" value={this.state.commentText} onChange={this.handleChange}/> */}
-                        <textarea rows="4" cols="50" value={this.commentText} onChange={this.handleChange}>
+        <div id="PostComment"><hr></hr>
+                    <div className="form-group textStyle">
+                        <textarea rows="4" cols="50" className="commentBox" value={this.commentText} onChange={this.handleChange}>
                         </textarea>
                     </div>
                 <button type="submit" onClick={this.handleCommentSubmit} className="button">Submit!</button>
-            <ol>
-                {this.state.postInfo.map(function(snapshot){ return(<li key={snapshot.commentKey}>{snapshot.text} | posted by: {snapshot.userID}</li>)})}
+            <ol className="textStyle">
+                {this.state.postInfo.map(function(snapshot){ return(<div><li key={snapshot.commentKey}>{snapshot.text} | posted by: {snapshot.userID}</li><hr></hr></div>)})}
             </ol>
         </div>
         );

@@ -11,7 +11,7 @@
 }
 .postTile img{
     width: 150px;
-    margin: 10px 10px 10px 20px;
+    margin: -20px 10px 10px 10px;
     border: 3px solid rgb(0, 101, 164);
 }
 .postdata{
@@ -22,16 +22,27 @@
     display: flex;
     flex-direction: row;
     border: 2px solid rgb(0, 101, 164);
-    margin: 0px;
+    margin: 0px 0px 0px 0px;
 }
-.postTile h2{
+.postTile span{
     margin: 5px;
 }
 .pTitle {
     padding-left: 15px;
+    color: blue;
+    font-size: 25px;
+    font-weight: bold;
 }
+
+.pTitle span:link {
+    color: blue;
+  }
+  /* visited link */
+  .pTitle span:visited {
+    color: purple;
+  }
 .author {
-    margin-left: 28px;
+    margin-left: 20px;
 }
 .downvotebutton {
     background-image: url(downvote.png);
@@ -48,4 +59,9 @@
     background-position: 50% 50%;
     /* put the height and width of your image here */
     background-size: cover;
+}
+.postDescription {
+    text-indent: 38px;
+    margin-left: 5px;
+    font-size: 20px;
 }

@@ -1,5 +1,6 @@
 .Root{
     text-align: left
+    
 }
 .button { 
     padding: 4px 10px 4px 10px;
@@ -38,4 +39,18 @@
   }
   .inputText {
       margin-left: 10px;
+  }
+  .loginGroup {
+      text-align: center;
+  }
+  .textStyle {
+    font-family: Verdana, Geneva, sans-serif;
+  }
+  .commentBox {
+    margin-top: 5px;
+    margin-left: 5px;  
+  }
+  .profileText {
+    margin-top: 10px;
+    margin-left: 15px; 
   }

@@ -8,7 +8,7 @@ class PostPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            postInfo : null
+            postInfo : {}
         }
     }
 
@@ -26,6 +26,8 @@ class PostPage extends Component {
         <div id="PostPage">
             <NavBar username={this.props.username}/>
             <Post postid={this.props.postid}/>
+            <hr></hr>
+            <p className="textStyle postDescription">{this.state.postInfo.text}</p>
             <PostComment postid={this.props.postid} username={this.props.username}/>
         </div>
         );

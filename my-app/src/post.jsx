@@ -5,8 +5,6 @@ import ReactDOM from "react-dom"
 import PostPage from "./PostPage.jsx"
 import Home from "./Home.js"
 
-
-// feed me a prop called postid which will be the key of the post in Firebase
 class Post extends Component {
     constructor(props) {
         super(props);
@@ -21,16 +19,12 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        //do a firebase query for the post
-        // let ref = fire.database().ref("/Posts/"+this.props.postid+"/")
-        // this.setState({postInfo : ref})
         this.state.postRef.on('value', (snapshot =>{
             this.setState({postInfo : snapshot.val()})
         }))
     }
 
     componentDidUpdate(prevProps) {
-        //not sure if we need this, since we probably only want to update when the user requests an update, but maybe not
     }
 
     goHome() {
@@ -38,7 +32,7 @@ class Post extends Component {
     }
 
     change() {
-        ReactDOM.render(<PostPage postid={this.props.postid} username={this.props.username}/>, document.getElementById("root"));
+        ReactDOM.render(<PostPage postid={this.props.postid} username={this.props.username} media={this.props.media}/>, document.getElementById("root"));
     }    
     
     vote(e){
@@ -104,7 +98,7 @@ class Post extends Component {
 
     render() {
         if (this.state.postInfo !== null) {
-            return <div className="postTile">
+            return <div className="postTile textStyle">
                     {/* <button onClick={this.goHome}>Home</button> */}
                     <div className="votebox">
                         <button className="upvotebutton" value="up" onClick={this.vote}>&#8205; &#8205; &#8205;</button>
@@ -113,10 +107,10 @@ class Post extends Component {
                     </div>
                     <div className="postdata">
                         <span className="author">{"Posted by: "+this.state.postInfo.userID}</span><br/>
-                        <h2 onClick={this.change} className="pTitle">{this.state.postInfo.title}</h2>
+                        <p onClick={this.change} className="pTitle">{this.state.postInfo.title}</p>
                         <img className="postImage" onClick={this.change} src={this.state.postInfo.media} alt={this.state.postInfo.userID + "img"}></img>
                     </div>
-                </div>;
+                </div>
         } else {
             return <div>
                     <p>...No Post Data...</p>

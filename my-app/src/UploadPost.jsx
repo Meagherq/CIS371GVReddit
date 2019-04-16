@@ -53,15 +53,15 @@ class UploadPost extends Component {
     }
     render() {
         return(
-            <div>
+            <div className="textStyle">
                 <NavBar username={this.props.username}/>
                 <h1 className="inputText">Create a new post!</h1>
                 <label className="inputText">Input post title </label>
-                <input type="text" value={this.postTitle} placeholder="Your title" onChange={this.handleTitleChange}/><br/>
+                <input type="text" value={this.postTitle} placeholder="Your title" onChange={this.handleTitleChange}/><hr></hr><br/>
                 <label className="inputText">Input post description </label>
-                <input type="text" value={this.postDescription} placeholder="Your description" onChange={this.handleDescripChange}/><br/>
+                <input type="text" value={this.postDescription} placeholder="Your description" onChange={this.handleDescripChange}/><hr></hr><br/>
                 <label className="inputText"> Input image URL </label>
-                <input type="text" value={this.imgURL} placeholder="Your URL" onChange={this.handleUrlChange}/><br/>
+                <input type="text" value={this.imgURL} placeholder="Your URL" onChange={this.handleUrlChange}/><hr></hr><br/>
                 <button onClick={this.handlePostSubmit} className="button">Submit your post!</button> 
             </div>
         )

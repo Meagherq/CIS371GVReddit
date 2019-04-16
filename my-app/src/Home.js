@@ -11,7 +11,7 @@ class Home extends Component {
     this.state = {
         username : fire.auth().currentUser.email.substring(0, fire.auth().currentUser.email.indexOf('@'))
     }
-    this.logout = this.logout.bind(this);
+    // this.logout = this.logout.bind(this);
     var tempUser = fire.auth().currentUser;
     var database = fire.database();
     var userRef = database.ref();
@@ -38,30 +38,26 @@ class Home extends Component {
         
     }
 
-  logout() {
-    fire.auth().signOut();
-    // eslint-disable-next-line no-restricted-globals
-    location.reload(true);
-  }
+//   logout() {
+//     fire.auth().signOut();
+//     // eslint-disable-next-line no-restricted-globals
+//     location.reload(true);
+//   }
 
    
   render() {
     return (
-        //Dont modify app modify base elementbyid
         <div>
         <div className="NavBar">
             <NavBar username={this.state.username}/>
         </div>
       <div id="base">
-        {/* <p id="homeTitle">CIS 371 GVReddit</p> */}
         <img src={logo} id="logoimg" alt=""/>
-        <p id="siteAuthors">By: Quinn Meagher, Nolan Gustafson, and Jake Young</p>
+        <p id="siteAuthors" className="textStyle" >By: Quinn Meagher, Nolan Gustafson, and Jake Young</p>
         <div className ="ContentTitle">
           <PostList username={this.state.username}/>
-          {/* <Post postid="template(ID)" username={this.state.username}/>
-          <Post postid="template(ID)" username={this.state.username}/> */}
         </div>
-        <button class="button" onClick={this.logout}>Logout</button>
+        {/* <button class="button" onClick={this.logout}>Logout</button> */}
       </div>
       </div>
     );
