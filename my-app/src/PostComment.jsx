@@ -70,7 +70,7 @@ class PostComment extends Component {
                         <textarea rows="4" cols="50" value={this.commentText} onChange={this.handleChange}>
                         </textarea>
                     </div>
-                <button type="submit" onClick={this.handleCommentSubmit} className="btn btn-primary">Submit!</button>
+                <button type="submit" onClick={this.handleCommentSubmit} className="button">Submit!</button>
             <ol>
                 {this.state.postInfo.map(function(snapshot){ return(<li key={snapshot.commentKey}>{snapshot.text} | posted by: {snapshot.userID}</li>)})}
             </ol>

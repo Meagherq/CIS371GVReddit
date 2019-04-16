@@ -4,8 +4,6 @@ import './post.css';
 import ReactDOM from "react-dom"
 import PostPage from "./PostPage.jsx"
 import Home from "./Home.js"
-import upvote from "./upvote.png"
-import downvote from  "./downvote.png"
 
 
 // feed me a prop called postid which will be the key of the post in Firebase
@@ -109,7 +107,7 @@ class Post extends Component {
             return <div className="postTile">
                     {/* <button onClick={this.goHome}>Home</button> */}
                     <div className="votebox">
-                        <button className="upvotebutton" value="up" src={upvote} onClick={this.vote}>&#8205; &#8205; &#8205;</button>
+                        <button className="upvotebutton" value="up" onClick={this.vote}>&#8205; &#8205; &#8205;</button>
                         <span>{this.state.postInfo.upvotes - this.state.postInfo.downvotes}</span>
                         <button className="downvotebutton" value="down" onClick={this.vote}>&#8205; &#8205; &#8205;</button>
                     </div>
