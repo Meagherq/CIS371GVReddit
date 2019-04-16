@@ -55,14 +55,14 @@ class UploadPost extends Component {
         return(
             <div>
                 <NavBar username={this.props.username}/>
-                <h1>Create a new post!</h1>
-                <label>Input post title </label>
+                <h1 className="inputText">Create a new post!</h1>
+                <label className="inputText">Input post title </label>
                 <input type="text" value={this.postTitle} placeholder="Your title" onChange={this.handleTitleChange}/><br/>
-                <label> Input post description </label>
+                <label className="inputText">Input post description </label>
                 <input type="text" value={this.postDescription} placeholder="Your description" onChange={this.handleDescripChange}/><br/>
-                <label> Input image URL </label>
+                <label className="inputText"> Input image URL </label>
                 <input type="text" value={this.imgURL} placeholder="Your URL" onChange={this.handleUrlChange}/><br/>
-                <button onClick={this.handlePostSubmit} className="postButton">Submit your post!</button> 
+                <button onClick={this.handlePostSubmit} className="button">Submit your post!</button> 
             </div>
         )
     }

@@ -4,9 +4,15 @@
     flex-direction: column;
     align-items: center;
     background-color: rgb(205, 215, 233);
+    max-height: 70px;
+    max-width: 70px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
 .postTile img{
     width: 150px;
+    margin: 10px 10px 10px 20px;
+    border: 3px solid rgb(0, 101, 164);
 }
 .postdata{
     display: inline
@@ -15,9 +21,31 @@
 .postTile{
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
-    margin: 5px;
+    border: 2px solid rgb(0, 101, 164);
+    margin: 0px;
 }
 .postTile h2{
     margin: 5px;
+}
+.pTitle {
+    padding-left: 55px;
+}
+.author {
+    margin-left: 28px;
+}
+.downvotebutton {
+    background-image: url(downvote.png);
+  background-position: 30% 60%;
+  background-repeat: no-repeat;
+  /* put the height and width of your image here */
+  background-size: cover;
+  margin-top: 4px;
+}
+
+.upvotebutton {
+    background-image: url(upvote.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    background-size: cover;
 }

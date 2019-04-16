@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import fire from "./config/Fire";
 import NavBar from "./NavBar.jsx"
 import PostList from "./postList.jsx"
+import logo from "./logo.png"
 
 
 class Home extends Component {
@@ -52,17 +53,15 @@ class Home extends Component {
             <NavBar username={this.state.username}/>
         </div>
       <div id="base">
-        <p id="title">CIS 371 GVReddit</p>
-        <br />
-        <p id="authors">By: Quinn Meagher, Nolan Gustafson, and Jake Young</p>
-        <br />
-        <h1>Welcome to Home</h1>
+        {/* <p id="homeTitle">CIS 371 GVReddit</p> */}
+        <img src={logo} id="logoimg" alt=""/>
+        <p id="siteAuthors">By: Quinn Meagher, Nolan Gustafson, and Jake Young</p>
         <div className ="ContentTitle">
           <PostList username={this.state.username}/>
           {/* <Post postid="template(ID)" username={this.state.username}/>
           <Post postid="template(ID)" username={this.state.username}/> */}
         </div>
-        <button onClick={this.logout}>Logout</button>
+        <button class="button" onClick={this.logout}>Logout</button>
       </div>
       </div>
     );

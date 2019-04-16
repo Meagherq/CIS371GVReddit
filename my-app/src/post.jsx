@@ -4,6 +4,8 @@ import './post.css';
 import ReactDOM from "react-dom"
 import PostPage from "./PostPage.jsx"
 import Home from "./Home.js"
+import upvote from "./upvote.png"
+import downvote from  "./downvote.png"
 
 
 // feed me a prop called postid which will be the key of the post in Firebase
@@ -107,14 +109,14 @@ class Post extends Component {
             return <div className="postTile">
                     {/* <button onClick={this.goHome}>Home</button> */}
                     <div className="votebox">
-                        <button value="up" onClick={this.vote}>^</button>
+                        <button className="upvotebutton" value="up" src={upvote} onClick={this.vote}>&#8205; &#8205; &#8205;</button>
                         <span>{this.state.postInfo.upvotes - this.state.postInfo.downvotes}</span>
-                        <button value="down" onClick={this.vote}>v</button>
+                        <button className="downvotebutton" value="down" onClick={this.vote}>&#8205; &#8205; &#8205;</button>
                     </div>
                     <div className="postdata">
                         <span className="author">{"Posted by: "+this.state.postInfo.userID}</span><br/>
-                        <h2 onClick={this.change} className="title">{this.state.postInfo.title}</h2>
-                        <img src={this.state.postInfo.media} alt={this.state.postInfo.userID + "img"}></img>
+                        <h2 onClick={this.change} className="pTitle">{this.state.postInfo.title}</h2>
+                        <img className="postImage" onClick={this.change} src={this.state.postInfo.media} alt={this.state.postInfo.userID + "img"}></img>
                     </div>
                 </div>;
         } else {

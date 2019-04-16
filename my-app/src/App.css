@@ -1,0 +1,41 @@
+.Root{
+    text-align: left
+}
+.button { 
+    padding: 4px 10px 4px 10px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: rgb(0, 101, 164);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+    margin-left : 6px;
+    margin-top : 6px;
+    margin-bottom : 8px;
+  }
+  
+  .button:hover {background-color: #3e8e41}
+  
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  body {
+      background-color: #CEE3F8
+  }
+  #siteAuthors {
+      text-align: center;
+  }
+  #logoimg {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  }
+  .inputText {
+      margin-left: 10px;
+  }

@@ -5,8 +5,6 @@ import fire from "./config/Fire";
 
 var commentInfo = []
 var commentText = "";
-
-
 class PostComment extends Component {
     constructor(props) {
         super(props);
@@ -21,23 +19,17 @@ class PostComment extends Component {
 
 
     componentDidMount() {
-    fire.database().ref("/Posts/"+this.props.postid+"/comments").on('child_added', ((commentSnapshot) => {
-            console.log(commentSnapshot.key, "string")
-                fire.database().ref("/Comments/"+commentSnapshot.key).once('value', (infoSnapshot) => {
-                console.log(infoSnapshot.val(), "string2")
+        fire.database().ref("/Posts/"+this.props.postid+"/comments").on('child_added', ((commentSnapshot) => {
+            fire.database().ref("/Comments/"+commentSnapshot.key).once('value', (infoSnapshot) => {
                 commentInfo.push({...infoSnapshot.val(), commentKey: infoSnapshot.key})
-                console.log(commentInfo, "string3")
                 this.setState({postInfo : commentInfo})
             })
-        })
-    )
-
-}
+        }))
+    }
 
 
 
     handleCommentSubmit() {
-
         var newData= {
             downvotes : 0,
             upvotes : 0,

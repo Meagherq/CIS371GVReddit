@@ -29,9 +29,9 @@ class NavBar extends Component {
     render() {
         return(
             <div>
-                <button onClick={this.goHome}>Home</button>
-                <button onClick={this.goProfile}>Profile</button>
-                <button onClick={this.goNewPost}>Make a new post!</button>
+                <button className="button" onClick={this.goHome}>Home</button>
+                <button className="button" onClick={this.goProfile}>Profile</button>
+                <button className="button" onClick={this.goNewPost}>Make a new post!</button>
             </div>
             );
     }
