@@ -14,13 +14,30 @@ class Post extends Component {
         this.state = {
             postInfo : null,
             postRef : fire.database().ref("/Posts/"+this.props.postid+"/"),
-            topRef : fire.database().ref()
+            topRef : fire.database().ref(),
+            author : null,
+            postListener : null
         }
     }
 
     componentDidMount() {
         this.state.postRef.on('value', (snapshot =>{
-            this.setState({postInfo : snapshot.val()})
+            let authorSnap = fire.database().ref("/Users/").orderByChild("username").equalTo(snapshot.val().userID).on("value", authorsnap =>{
+                authorsnap.forEach(snap =>{
+                    if(snap.exists()){
+                        if(snap.val().username === snapshot.val().userID){
+                            authorSnap = snap
+                            console.log("user object", authorSnap)
+                            this.setState({author : authorSnap})
+                        }
+                        
+                    }
+                })
+                
+            })
+            this.setState({
+                postInfo : snapshot.val()
+            })
         }))
     }
 
@@ -39,24 +56,36 @@ class Post extends Component {
         let yaynay = e.target.value
         let currentuid = fire.auth().currentUser.uid
         let userRef = this.state.topRef.child("/Users/"+currentuid)
+        let authorRef = this.state.topRef.child("/Users/"+this.state.author.key)
         userRef.child("/votesMade/"+this.props.postid).once("value", snapshot =>{
+            // let authorVotesUp = this.state.author.val().totalUpvotes
+            // let authorVotesDown = this.state.author.val().totalDownvotes
             if(snapshot.exists()){ //vote has already been made
                 //previous vote for this post is 'up'
                 if(snapshot.val() === 'up'){ 
                     if(yaynay === 'up'){    //pressed 'up' again, so cancel last vote
                         userRef.child("/votesMade/").update({[this.props.postid] : null})//cancel by changing opinion in User table to null
                         let votesUp = this.state.postInfo.upvotes
+                        let authorVotesUp = this.state.author.val().totalUpvotes
                         votesUp--   //adjust post's upvotes
+                        authorVotesUp--
                         this.state.postRef.update({upvotes : votesUp})
+                        authorRef.update({totalUpvotes : authorVotesUp})
                     }
                     if(yaynay === 'down'){
                         userRef.child("/votesMade/").update({[this.props.postid] : 'down'})//change opinion in User table to 'down'
                         let votesDown = this.state.postInfo.downvotes
                         let votesUp = this.state.postInfo.upvotes
+                        let authorVotesUp = this.state.author.val().totalUpvotes
+                        let authorVotesDown = this.state.author.val().totalDownvotes
                         votesUp--   //adjust upvotes
                         votesDown++ //adjust downvotes
+                        authorVotesUp--
+                        authorVotesDown++
                         this.state.postRef.update({upvotes : votesUp})
                         this.state.postRef.update({downvotes : votesDown})
+                        authorRef.update({totalUpvotes : authorVotesUp})
+                        authorRef.update({totalDownvotes : authorVotesDown})
                     }
                 }
                 //previous was 'down'
@@ -64,17 +93,26 @@ class Post extends Component {
                     if(yaynay === 'down'){    //pressed 'down' again, so cancel last vote
                         userRef.child("/votesMade/").update({[this.props.postid] : null})//cancel by changing opinion in User table to null
                         let votesDown = this.state.postInfo.downvotes
+                        let authorVotesDown = this.state.author.val().totalDownvotes
                         votesDown--   //adjust post's downvotes
+                        authorVotesDown--
                         this.state.postRef.update({downvotes : votesDown})
+                        authorRef.update({totalDownvotes : authorVotesDown})
                     }
                     if(yaynay === 'up'){
                         userRef.child("/votesMade/").update({[this.props.postid] : 'up'})//change opinion in User table to 'up'
                         let votesUp = this.state.postInfo.upvotes
                         let votesDown = this.state.postInfo.downvotes
+                        let authorVotesUp = this.state.author.val().totalUpvotes
+                        let authorVotesDown = this.state.author.val().totalDownvotes
                         votesUp++ //adjust upvotes
                         votesDown-- //adjust downvotes
+                        authorVotesUp++
+                        authorVotesDown--
                         this.state.postRef.update({upvotes : votesUp})
                         this.state.postRef.update({downvotes : votesDown})
+                        authorRef.update({totalUpvotes : authorVotesUp})
+                        authorRef.update({totalDownvotes : authorVotesDown})
                     }
                 }
             }
@@ -82,14 +120,20 @@ class Post extends Component {
                 if(yaynay === 'up'){
                     userRef.child("/votesMade/").update({[this.props.postid] : 'up'})//change opinion in User table to 'up'
                     let votesUp = this.state.postInfo.upvotes
+                    let authorVotesUp = this.state.author.val().totalUpvotes
                     votesUp++
+                    authorVotesUp++
                     this.state.postRef.update({upvotes : votesUp})
+                    authorRef.update({totalUpvotes : authorVotesUp})
                 }
                 if(yaynay === 'down'){
                     userRef.child("/votesMade/").update({[this.props.postid] : 'down'})//change opinion in User table to 'up'
                     let votesDown = this.state.postInfo.downvotes
+                    let authorVotesDown = this.state.author.val().totalDownvotes
                     votesDown++
+                    authorVotesDown++
                     this.state.postRef.update({downvotes : votesDown})
+                    authorRef.update({totalDownvotes : authorVotesDown})
                 }
             }
         })

@@ -27,11 +27,14 @@ class Profile extends Component {
       }
     }))
     var u = {};
-    fire.database().ref("/Users/").on('child_added', ((snapshot) => {
-      if(snapshot.val().username === this.username) {
-        u = snapshot.val();
-        this.setState({user: u});
-      }
+    fire.database().ref("/Users/").on('value', ((userssnapshot) => {
+      userssnapshot.forEach(snapshot =>{
+        if(snapshot.val().username === this.username) {
+          u = snapshot.val();
+          this.setState({user: u});
+        }
+      })
+      
     }))
   }
 
